@@ -5,12 +5,12 @@ void save(Product *product) {
     return;
 }
 
-Product getProductById(unsigned long id) {
+Product* getProductById(unsigned long id) {
     printf("Buscando pelo produto de id: %ld\n", id);
     return;
 }
 
 Product* getAllProducts() {
-    printf("Buscando todos os produtos\n");
-    return;
+    printf("uscando todos os produtos\n");
+    return [];
 }

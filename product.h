@@ -10,8 +10,4 @@ typedef struct Product
     char description[255];
 } Product;
 
-void save(Product *product);
-Product getProductById(unsigned long id);
-Product* getAllProducts();
-
 #endif // PRODUCT_H_INCLUDED

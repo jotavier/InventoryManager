@@ -5,10 +5,10 @@
 
 int main()
 {
-    getInventory();
-    Product prod = {.description="Banana"};
-    save(&prod);
-    getProductById(1);
-    getAllProducts();
+    InventoryDatabase *db = getInventory();
+    Product prod = {.id=1, .amount=5, .price=55.8, .description="Banana"};
+    saveProduct(&db, &prod);
+    getProductById(&db, 1);
+    getAllProducts(&db);
     return 0;
 }
