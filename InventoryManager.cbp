@@ -5,6 +5,7 @@
 		<Option title="InventoryManager" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Models\;Database\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Inventory" prefix_auto="1" extension_auto="1" />
@@ -31,8 +32,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="database.h">
+			<Option virtualFolder="Database/" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="product.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="product.h">
+			<Option virtualFolder="Models/" />
 		</Unit>
 		<Extensions>
 			<code_completion />
