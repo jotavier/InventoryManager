@@ -1,13 +1,16 @@
 #include "product.h"
 
 void save(Product *product) {
-    printf("Salvando: %s", product->description);
+    printf("Salvando: %s\n", product->description);
+    return;
 }
 
 Product getProductById(unsigned long id) {
-    printf("Buscando pelo produto de id: %ld", id);
+    printf("Buscando pelo produto de id: %ld\n", id);
+    return;
 }
 
 Product* getAllProducts() {
-    printf("Buscando todos os produtos");
+    printf("Buscando todos os produtos\n");
+    return;
 }

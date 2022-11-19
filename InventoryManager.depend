@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1668882550 source:c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\main.c
+	<stdio.h>
+	<stdlib.h>
+	"product.h"
+	"database.h"
+
+1668882465 c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\product.h
+
+1668882578 source:c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\product.c
+	"product.h"
+
+1668880737 source:c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\database.c
+	<stdio.h>
+	"database.h"
+	"libs/sqlite3/sqlite3.h"
+
+1668880650 c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\database.h
+
+1668606157 c:\users\jucemar\documents\faculdade\appliedprogramming\projetofinal\inventorymanager\libs\sqlite3\sqlite3.h
+	<stdarg.h>
+

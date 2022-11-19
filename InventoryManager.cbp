@@ -32,6 +32,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add library="libs\sqlite3\sqlite3.o" />
+		</Linker>
+		<Unit filename="database.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="database.h">
 			<Option virtualFolder="Database/" />
 		</Unit>
