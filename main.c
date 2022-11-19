@@ -5,10 +5,12 @@
 
 int main()
 {
-    InventoryDatabase *db = getInventory();
+    sqlite3 *db = getDatabase();
     Product prod = {.id=1, .amount=5, .price=55.8, .description="Banana"};
     saveProduct(&db, &prod);
-    getProductById(&db, 1);
+    deleteProductById(&db, 2);
+    findProductById(&db, 3);
+    findProductByDescription(&db, "Banana");
     getAllProducts(&db);
     return 0;
 }
