@@ -34,8 +34,8 @@ void saveProduct(sqlite3 *db, Product *product)
     /*
     char *sql = "INSERT INTO products VALUES(%ld, %ld, %ld, %s);" ,
           *errorMessage;
-    int length = sizeof(sql) + sizeof(Product);
-    printf("Chegou");
+    int length = sizeof(&sql) + sizeof(&product);
+    printf(length);
     snprintf(sql, length, product->id, product->price, product->amount, product->description);
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
 
