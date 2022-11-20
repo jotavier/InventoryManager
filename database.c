@@ -62,34 +62,34 @@ void deleteProductById(sqlite3 *db, unsigned long id)
     char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
 
     sprintf(sql, "DELETE FROM %s WHERE id = %ld", PRODUCT_TABLE_NAME, id);
-    printf(sql);
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
-    printf("Chegou");
+
     if(status != SQLITE_OK)
     {
-        printf("Chegou dentro");
         fprintf(stderr, "Nao foi possivel excluir este produto (#%s). Causa: %s\n", id, errorMessage);
-        printf("Chegou dentro 2");
         sqlite3_free(errorMessage);
         return;
     }
-    printf("Chegou fora");
+
     printf("Produto #%ld excluido com sucesso.\n\n", id);
 }
 
-Product findProductById(sqlite3 *db, unsigned long id)
+void findProductById(sqlite3 *db, unsigned long id)
 {
     printf("Buscando produto de id: %ld\n", id);
+    char sql[DEFAULT_STATEMENT_SIZE], char *errorMessage;
+    sprintf(sql, "SELECT * FROM ")
+
     return;
 }
 
-Product findProductByDescription(sqlite3 *db, char *description)
+void findProductByDescription(sqlite3 *db, char *description)
 {
     printf("Buscando produto por descricao: %s\n", description);
     return;
 }
 
-Product* getAllProducts(sqlite3 *db)
+void* getAllProducts(sqlite3 *db)
 {
     printf("Buscando todos os produtos\n");
     return;
