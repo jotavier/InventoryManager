@@ -2,6 +2,10 @@
 #define PRODUCT_H_INCLUDED
 
 #define PRODUCT_TABLE_NAME "products"
+#define HEADER_ID "Id"
+#define HEADER_DESCRIPTION "Descricao"
+#define HEADER_AMOUNT "Quantidade"
+#define HEADER_PRICE "Preco"
 
 typedef struct Product
 {

@@ -11,8 +11,8 @@
 sqlite3* getDatabase();
 void saveProduct(sqlite3 *db, Product *product);
 void deleteProductById(sqlite3 *db, unsigned long id);
-Product findProductById(sqlite3 *db, unsigned long id);
-Product findProductByDescription(sqlite3 *db, char *description);
-Product* getAllProducts(sqlite3 *db);
+void findProductById(sqlite3 *db, unsigned long id);
+void findProductByDescription(sqlite3 *db, char *description);
+void getAllProducts(sqlite3 *db);
 
 #endif // DATABASE_H_INCLUDED
