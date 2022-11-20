@@ -1,7 +1,5 @@
 #include "database.h"
 
-#define CREATE
-
 sqlite3* getDatabase()
 {
     sqlite3 *db;
@@ -63,16 +61,19 @@ void deleteProductById(sqlite3 *db, unsigned long id)
     printf("Deletando produto de id: %ld\n", id);
     char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
 
-    sprintf(sql, "DELETE FROM %s pd WHERE pd.id = %ld", PRODUCT_TABLE_NAME, id);
+    sprintf(sql, "DELETE FROM %s WHERE id = %ld", PRODUCT_TABLE_NAME, id);
+    printf(sql);
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
-
+    printf("Chegou");
     if(status != SQLITE_OK)
     {
+        printf("Chegou dentro");
         fprintf(stderr, "Nao foi possivel excluir este produto (#%s). Causa: %s\n", id, errorMessage);
+        printf("Chegou dentro 2");
         sqlite3_free(errorMessage);
         return;
     }
-
+    printf("Chegou fora");
     printf("Produto #%ld excluido com sucesso.\n\n", id);
 }
 

@@ -9,7 +9,7 @@ int main()
     Product prod = {.id=1, .amount=5, .price=55.8, .description="Arroz"};
     saveProduct(db, &prod);
     // deleteProductById(db, 1);
-    // findProductById(db, 3);
+    findProductById(db, 1);
     // findProductByDescription(db, "Banana");
     // getAllProducts(db);
     system("PAUSE");
