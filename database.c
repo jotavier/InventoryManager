@@ -14,6 +14,8 @@ sqlite3* getDatabase()
     return db;
 }
 
+int callback(void *NotUsed, int columns, char **fields, char **columnsNames);
+
 void createInventory(sqlite3 *db)
 {
     char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
@@ -50,14 +52,21 @@ void saveProduct(sqlite3 *db, Product *product)
            );
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
 
-    if (status != SQLITE_OK)
+    switch(status)
     {
+    case SQLITE_OK:
+        printf("Produto: %s, salvo(a) com sucesso.\n\n", product->description);
+        break;
+    case SQLITE_CONSTRAINT:
+        fprintf(stderr, "Nao foi possivel salvar este produto (%s). "
+                "Causa: Ja existe um produto com este Id ou Descricao.\n\n", product->description, errorMessage);
+        sqlite3_free(errorMessage);
+        findProductByDescription(db, product->description);
+        break;
+    default:
         fprintf(stderr, "Nao foi possivel salvar este produto (%s). Causa: %s\n\n", product->description, errorMessage);
         sqlite3_free(errorMessage);
-        return;
     }
-
-    printf("Produto: %s, salvo(a) com sucesso.\n\n", product->description);
 }
 
 void deleteProductById(sqlite3 *db, unsigned long id)
@@ -77,8 +86,6 @@ void deleteProductById(sqlite3 *db, unsigned long id)
 
     printf("Produto #%ld excluido com sucesso.\n\n", id);
 }
-
-int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
 void findProductById(sqlite3 *db, unsigned long id)
 {
@@ -126,18 +133,24 @@ void getAllProducts(sqlite3 *db)
     }
 }
 
-int callback(void *NotUsed, int argc, char **argv, char **azColName)
+int callback(void *NotUsed, int columns, char **fields, char **columnsNames)
 {
 
     NotUsed = 0;
+    int column;
 
-    int i;
-    for (i = 0; i < argc; i++)
+    printf("\t[");
+
+    for (column = 0; column < columns; column++)
     {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+        printf("%s: %s", columnsNames[column], fields[column] ? fields[column] : "NULL");
+        if(column != columns - 1)
+        {
+            printf("     ");
+        }
     }
 
-    printf("\n");
+    printf("]\n\n");
 
     return 0;
 }
