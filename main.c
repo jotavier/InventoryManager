@@ -6,12 +6,12 @@
 int main()
 {
     sqlite3 *db = getDatabase();
-    Product prod = {.id=1, .amount=5, .price=55.8, .description="Banana"};
+    Product prod = {.id=1, .amount=5, .price=55.8, .description="Arroz"};
     saveProduct(db, &prod);
-    deleteProductById(db, 1);
-    findProductById(db, 3);
-    findProductByDescription(db, "Banana");
-    getAllProducts(db);
+    // deleteProductById(db, 1);
+    // findProductById(db, 3);
+    // findProductByDescription(db, "Banana");
+    // getAllProducts(db);
     system("PAUSE");
     return 0;
 }

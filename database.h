@@ -6,7 +6,7 @@
 #include "product.h"
 
 #define DATABASE_NAME "inventory.db"
-#define PRODUCT_TABLE_NAME "products"
+#define DEFAULT_STATEMENT_SIZE 1000000
 
 sqlite3* getDatabase();
 void saveProduct(sqlite3 *db, Product *product);

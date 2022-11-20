@@ -18,33 +18,33 @@ sqlite3* getDatabase()
 
 void createInventory(sqlite3 *db)
 {
-    char *sql, *errorMessage = "Desconhecida";
+    char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
+
     sprintf(sql,
-           "CREATE TABLE IF NOT EXISTS %s"
-            "(id INT PRIMARY KEY NOT NULL, amount INT NOT NULL, price REAL NOT NULL, description TEXT NOT NULL);",
+           "CREATE TABLE IF NOT EXISTS %s(id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT UNIQUE NOT NULL, amount INT NOT NULL, price REAL NOT NULL);",
              PRODUCT_TABLE_NAME
            );
-           printf(sql);
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
 
     if (status != SQLITE_OK)
     {
         fprintf(stderr, "Nao foi possivel criar ou encontrar o Estoque. Causa: %s\n", errorMessage);
         sqlite3_free(errorMessage);
+        sqlite3_close(db);
+        exit(1);
     }
 }
 
 void saveProduct(sqlite3 *db, Product *product)
 {
     printf("Salvando: %s\n", product->description);
-    char *sql, *errorMessage = "Desconhecida";
+    char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
 
-    sprintf(sql, "INSERT INTO %s VALUES(%ld, %ld, %lf, '%s');",
+    sprintf(sql, "INSERT INTO %s VALUES(?, '%s', %ld, %lf);",
             PRODUCT_TABLE_NAME,
-            product->id,
+            product->description,
             product->amount,
-            product->price,
-            product->description
+            product->price
            );
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
 
@@ -54,28 +54,26 @@ void saveProduct(sqlite3 *db, Product *product)
         sqlite3_free(errorMessage);
         return;
     }
+
     printf("Produto: %s, salvo(a) com sucesso.\n\n", product->description);
 }
 
 void deleteProductById(sqlite3 *db, unsigned long id)
 {
     printf("Deletando produto de id: %ld\n", id);
-    char *sql, *errorMessage = "Desconhecida";
+    char sql[DEFAULT_STATEMENT_SIZE], *errorMessage = "Desconhecida";
 
     sprintf(sql, "DELETE FROM %s pd WHERE pd.id = %ld", PRODUCT_TABLE_NAME, id);
-    printf("Chegou");
     int status = sqlite3_exec(db, sql, 0, 0, &errorMessage);
 
-    printf(status);
     if(status != SQLITE_OK)
     {
-        printf("Chegou");
         fprintf(stderr, "Nao foi possivel excluir este produto (#%s). Causa: %s\n", id, errorMessage);
         sqlite3_free(errorMessage);
         return;
     }
 
-    printf("Produto #%s excluido com sucesso.\n\n", id);
+    printf("Produto #%ld excluido com sucesso.\n\n", id);
 }
 
 Product findProductById(sqlite3 *db, unsigned long id)
