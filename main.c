@@ -30,7 +30,8 @@ int main()
     db = getDatabase();
     do
     {
-        switch(getOperation(&operation))
+        operation = getOperation();
+        switch(operation)
         {
         case REGISTER_NEW_PRODUCT:
             registerNewProduct();
@@ -59,8 +60,9 @@ int main()
     return 0;
 }
 
-int getOperation(int *operation)
+int getOperation()
 {
+    int operation = INVALID_OPERATION;
     printf("\n................................................................\n");
     printf("\n |Sistema de Gerenciamento de Estoque| \n\n");
     printf(" - Menu de funcoes, selecione o processo que deseja realizar:\n");
