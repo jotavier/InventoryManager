@@ -56,6 +56,7 @@ int main()
         }
     }
     while (operation != FINISH_APPLICATION);
+    sqlite3_close(db);
     return 0;
 }
 
