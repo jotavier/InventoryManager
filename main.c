@@ -30,8 +30,7 @@ int main()
     db = getDatabase();
     do
     {
-        operation = getOperation(&operation);
-        switch(operation)
+        switch(getOperation(&operation))
         {
         case REGISTER_NEW_PRODUCT:
             registerNewProduct();
