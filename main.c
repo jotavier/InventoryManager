@@ -30,6 +30,7 @@ int main()
     db = getDatabase();
     do
     {
+        fflush(stdin);
         operation = getOperation();
         switch(operation)
         {
@@ -74,7 +75,7 @@ int getOperation()
     printf("   [6] Encerrar programa\n");
     printf("\n................................................................\n");
     printf("\nEscolha: ");
-    scanf("%d", &operation);
+    if(!scanf("%d", &operation)) return INVALID_OPERATION;
     return operation;
 }
 
@@ -84,11 +85,12 @@ void registerNewProduct()
     printf("Entre com os dados do produto a ser cadastrado: \n\n");
     Product prod = {};
     printf("Descricao do produto: ");
-    scanf("%s", prod.description);
+    fflush(stdin);
+    gets(prod.description);
     printf("Preco do produto: ");
-    scanf("%lf", &prod.price);
+    if(!scanf("%lf", &prod.price)) return invalidValueMessage();
     printf("Quantidade em estoque: ");
-    scanf("%lu", &prod.amount);
+    if(!scanf("%lu", &prod.amount)) return invalidValueMessage();
     saveProduct(db, &prod);
 }
 void deleteProduct()
@@ -97,7 +99,7 @@ void deleteProduct()
     printf("\n----------------| DELETAR UM PRODUTO POR ID |---------------\n\n");
     getAllProducts(db);
     printf("Digite o ID do produto a ser deletado: ");
-    scanf("%ld", &id);
+    if(!scanf("%ld", &id)) return invalidValueMessage();
     deleteProductById(db, id);
 }
 void getProductById()
@@ -105,7 +107,7 @@ void getProductById()
     unsigned long id = 0;
     printf("\n---------------| PROCURAR UM PRODUTO POR ID |---------------\n\n");
     printf("Digite o ID do produto que deseja procurar: ");
-    scanf("%lu", &id);
+    if(!scanf("%lu", &id)) return invalidValueMessage();
     findProductById(db, id);
 }
 void getProductByDescription()
@@ -113,11 +115,16 @@ void getProductByDescription()
     char description[MAX_DESCRIPTION_LENGTH];
     printf("\n------------| PROCURAR UM PRODUTO POR DESCRICAO |------------\n\n");
     printf("Digite a descricao do produto que deseja procurar: ");
-    scanf("%s", &description);
+    fflush(stdin);
+    gets(description);
     findProductByDescription(db, description);
 }
 void showAllProducts()
 {
     printf("\n----------| MOSTRAR TODOS OS PRODUTOS CADASTRADOS |---------\n\n");
     getAllProducts(db);
+}
+
+void invalidValueMessage() {
+    printf("\n\nValor invalido. Retornando ao menu.\n\n");
 }
